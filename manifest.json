@@ -53,6 +53,16 @@
                 "default": "25565"
             },
             {
+                "name": "players",
+                "type": "players",
+                "ask": {
+                    "en": "Select players number ?",
+                    "fr": "Choisir nombre de joueur ?"
+                },
+                "example": "64",
+                "default": "64"
+            },
+            {
                 "name": "lang",
                 "type": "lang",
                 "ask": {
