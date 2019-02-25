@@ -115,7 +115,7 @@ ynh_system_user_create $app
 ynh_replace_string "__PATH__" "$final_path" "../conf/systemd.service"
 ynh_replace_string "__PLAYERS__" "$players" "../conf/tes3mp-server-default.cfg"
 ynh_replace_string "__PORT__" "$port" "../conf/tes3mp-server-default.cfg"
-#ynh_replace_string "__PASSWD__" "$passwd" "../conf/tes3mp-server-default.cfg"
+ynh_replace_string "__PASSWD__" "$passwd" "../conf/tes3mp-server-default.cfg"
 
 #=================================================
 # SETUP SYSTEMD
@@ -164,3 +164,4 @@ fi
 
 # Reload services
 systemctl reload nginx
+systemctl start $app.service

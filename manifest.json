@@ -73,6 +73,15 @@
                 "default": "EN"
             },
             {
+                "name": "passwd",
+                "type": "passwd",
+                "ask": {
+                    "en": "Enter your password for TES3MP !",
+                    "fr": "Entrez votre mot de passe pour TES3MP !"
+                },
+                "example": ""
+            },
+            {
                 "name": "is_public",
                 "type": "boolean",
                 "ask": {
