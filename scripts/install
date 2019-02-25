@@ -28,6 +28,8 @@ ynh_abort_if_errors
 domain=$YNH_APP_ARG_DOMAIN
 path_url=$YNH_APP_ARG_PATH
 is_public=$YNH_APP_ARG_IS_PUBLIC
+port=$YNH_APP_ARG_PORT
+lang=$YNH_APP_ARG_LANG
 
 ### If it's a multi-instance app, meaning it can be installed several times independently
 ### The id of the app as stated in the manifest is available as $YNH_APP_ID
@@ -47,7 +49,7 @@ app=$YNH_APP_INSTANCE_NAME
 
 ### If the app uses nginx as web server (written in HTML/PHP in most cases), the final path should be "/var/www/$app".
 ### If the app provides an internal web server (or uses another application server such as uwsgi), the final path should be "/opt/yunohost/$app"
-final_path=/opt/yunohost/$app
+final_path=/home/yunohost.app/$app
 test ! -e "$final_path" || ynh_die "This path already contains a folder"
 
 # Normalize the url path syntax
@@ -76,9 +78,11 @@ ynh_app_setting_set $app is_public $is_public
 ###		- Remove the section "CLOSE A PORT" in the remove script
 
 # Find a free port
-port=$(ynh_find_port 8096)
+port=$(ynh_find_port $port)
 # Open this port
 yunohost firewall allow --no-upnp TCP $port 2>&1
+yunohost firewall allow --no-upnp UDP $port 2>&1
+yunohost firewall allow --no-upnp TCP 25561 2>&1
 ynh_app_setting_set $app port $port
 
 #=================================================
@@ -88,12 +92,6 @@ ynh_app_setting_set $app port $port
 ynh_app_setting_set $app final_path $final_path
 # Download, check integrity, uncompress and patch the source from app.src
 ynh_setup_source "$final_path"
-
-#==============================================
-# INSTALL EMBY
-#==============================================
-
-dpkg --install  $final_path/emby-server-deb*
 
 #=================================================
 # NGINX CONFIGURATION
@@ -112,9 +110,18 @@ ynh_system_user_create $app
 #=================================================
 # MODIFY A CONFIG FILE
 #=================================================
-#cp -a ../conf/onlyoffice-documentserver.conf /etc/onlyoffice/documentserver/nginx/onlyoffice-documentserver.conf
-#ynh_replace_string "__NEXTCLOUDDOMAIN__" "$nextcloud_domain" "/etc/loolwsd/loolwsd.xml"
-#ynh_replace_string "__PASSWORD__" "$password" "/etc/loolwsd/loolwsd.xml"
+
+ynh_replace_string "__PATH__" "$final_path" "../conf/systemd.service"
+ynh_replace_string "__PLAYERS__" "$players" "../conf/tes3mp-server-default.cfg"
+ynh_replace_string "__PORT__" "$port" "../conf/tes3mp-server-default.cfg"
+ynh_replace_string "__PASSWD__" "$passwd" "../conf/tes3mp-server-default.cfg"
+
+#=================================================
+# SETUP SYSTEMD
+#=================================================
+
+ynh_add_systemd_config
+systemctl enable $app.service
 
 #=================================================
 # STORE THE CONFIG FILE CHECKSUM
@@ -139,7 +146,9 @@ ynh_system_user_create $app
 ### that really need such authorization.
 
 # Set permissions to app files
-#chown -R root: /etc/loolwsd
+cp -a ../conf/tes3mp-server-default.cfg $final_path/tes3mp-server-default.cfg
+cp -a ../conf/pluginlist-$lang.json $final_path/CoreScripts/data/pluginlist.json
+chown -R admin $final_path
 
 
 #=================================================
