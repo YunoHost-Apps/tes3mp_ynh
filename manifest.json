@@ -1,0 +1,58 @@
+{
+    "name": "TES3MP",
+    "id": "tes3mp",
+    "packaging_format": 1,
+    "description": {
+        "en": "TES3MP package for YunoHost.",
+        "fr": "TES3MP pour YunoHost."
+    },
+    "version": "0.7.0",
+    "url": "https://tes3mp.com/",
+    "license": "free",
+    "maintainer": {
+        "name": "liberodark",
+        "email": "liberodark@gmail.com"
+    },
+    "requirements": {
+        "yunohost": ">= 2.7.2"
+    },
+    "multi_instance": false,
+    "services": [
+        "nginx",
+        "php5-fpm",
+        "mysql"
+    ],
+    "arguments": {
+        "install": [{
+                "name": "domain",
+                "type": "domain",
+                "ask": {
+                    "en": "Choose a domain name for TES3MP",
+                    "fr": "Choisissez un nom de domaine pour TES3MP"
+                },
+                "example": "example.com"
+            },
+
+            {
+                "name": "path",
+                "type": "path",
+                "ask": {
+                    "en": "Choose a path for TES3MP /tes3mp is accepted",
+                    "fr": "Choisissez un chemin pour TES3MP /tes3mp est accepté"
+                },
+                "example": "/tes3mp",
+                "default": "/tes3mp"
+            },
+            
+            {
+                "name": "is_public",
+                "type": "boolean",
+                "ask": {
+                    "en": "Is it a public site ?",
+                    "fr": "Est-ce un site public ?"
+                },
+                "default": "true"
+            }
+        ]
+    }
+}
