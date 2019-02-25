@@ -16,7 +16,7 @@
     "requirements": {
         "yunohost": ">= 2.7.2"
     },
-    "multi_instance": false,
+    "multi_instance": true,
     "services": [
         "nginx",
         "php5-fpm",
@@ -32,7 +32,6 @@
                 },
                 "example": "example.com"
             },
-
             {
                 "name": "path",
                 "type": "path",
@@ -43,7 +42,26 @@
                 "example": "/tes3mp",
                 "default": "/tes3mp"
             },
-            
+            {
+                "name": "port",
+                "type": "port",
+                "ask": {
+                    "en": "Select your port ?",
+                    "fr": "Choisir votre port ?"
+                },
+                "example": "25565",
+                "default": "25565"
+            },
+            {
+                "name": "lang",
+                "type": "lang",
+                "ask": {
+                    "en": "Select your language ?",
+                    "fr": "Choisir votre langue ?"
+                },
+                "choices": ["FR", "EN", "RU"],
+                "default": "EN"
+            },
             {
                 "name": "is_public",
                 "type": "boolean",
