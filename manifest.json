@@ -79,6 +79,7 @@
                     "en": "Enter your password for TES3MP !",
                     "fr": "Entrez votre mot de passe pour TES3MP !"
                 },
+                "optional": true,
                 "example": ""
             },
             {
