@@ -87,6 +87,13 @@ yunohost firewall allow --no-upnp UDP $port 2>&1
 yunohost firewall allow --no-upnp TCP 25561 2>&1
 ynh_app_setting_set $app port $port
 
+
+#==============================================
+# INSTALL DEPS
+#==============================================
+
+ynh_package_install libgl1-mesa-glx
+
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
 #=================================================

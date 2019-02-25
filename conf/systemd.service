@@ -8,7 +8,7 @@ User=admin
 Group=users
 Type=simple
 UMask=000
-ExecStart=__PATH__tes3mp-server
+ExecStart=__PATH__/tes3mp-server
 RestartSec=30
 Restart=always
 
