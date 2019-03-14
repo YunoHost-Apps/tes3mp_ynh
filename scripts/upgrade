@@ -147,7 +147,7 @@ ynh_add_systemd_config
 #=================================================
 
 # Set permissions on app files
-chown -R $app $final_path
+chown -R admin:1007 $final_path
 
 #=================================================
 # SETUP SSOWAT
