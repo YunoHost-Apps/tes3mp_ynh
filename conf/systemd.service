@@ -1,10 +1,10 @@
 [Unit]
-Description=__USER__
+Description=__APP__
 After=network.target
 
 [Service]
 WorkingDirectory=__PATH__
-User=__USER__
+User=__APP__
 Group=users
 Type=simple
 UMask=000
