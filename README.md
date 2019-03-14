@@ -1,6 +1,8 @@
 # TES3MP app for YunoHost
 TES3MP Server
 
+**Shipped version:** 0.7 Alpha
+
 - [Yunohost project](https://yunohost.org)
 - [TES3MP website](https://tes3mp.com/)
 
