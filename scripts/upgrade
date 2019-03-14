@@ -43,7 +43,7 @@ fi
 
 # If final_path doesn't exist, create it
 if [ -z $final_path ]; then
-	final_path=/var/www/$app
+	final_path=/home/yunohost.app/$app
 	ynh_app_setting_set $app final_path $final_path
 fi
 
