@@ -166,7 +166,7 @@ systemctl enable $app.service
 # Set permissions to app files
 cp -a ../conf/tes3mp-server-default.cfg $final_path/tes3mp-server-default.cfg
 cp -a ../conf/pluginlist-$lang.json $final_path/CoreScripts/data/pluginlist.json
-chown -R $app $final_path
+chown -R $app: $final_path
 
 
 #=================================================
